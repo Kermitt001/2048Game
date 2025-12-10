@@ -21,49 +21,14 @@ public class Main extends JFrame {
         pack();
         setLocationRelativeTo(null);
         
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                boolean moved = false;
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP:
-                    case KeyEvent.VK_W:
-                        moved = game.moveUp();
-                        break;
-                    case KeyEvent.VK_DOWN:
-                    case KeyEvent.VK_S:
-                        moved = game.moveDown();
-                        break;
-                    case KeyEvent.VK_LEFT:
-                    case KeyEvent.VK_A:
-                        moved = game.moveLeft();
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                    case KeyEvent.VK_D:
-                        moved = game.moveRight();
-                        break;
-                }
-
-                if (moved) {
-                    game.addRandomTile();
-                    panel.repaint();
-                    
-                    if (game.hasWon()) {
-                        JOptionPane.showMessageDialog(Main.this, "You Win! Score: " + game.getScore());
-                        // Optional: Reset logic
-                    }
-                    
-                    if (game.isGameOver()) {
-                        JOptionPane.showMessageDialog(Main.this, "Game Over! Score: " + game.getScore());
-                    }
-                }
-            }
-        });
+        // Remove KeyListener from here as it's now in GamePanel
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new Main().setVisible(true);
+            Main main = new Main();
+            main.setVisible(true);
+            main.panel.requestFocusInWindow();
         });
     }
 }
